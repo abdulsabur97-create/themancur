@@ -1,0 +1,1437 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Зарабатывай на ИИ уже через 7 дней — Мансур</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg0: #080502;
+      --bg1: #0C0804;
+      --bg2: #100A05;
+      --card: #180D04;
+      --card-hov: #231205;
+      --accent: #F97316;
+      --accent-l: #FB923C;
+      --accent-d: #C2410C;
+      --text: #F5EDE0;
+      --dim: #C4A882;
+      --muted: #7A5F3A;
+      --faint: #3D2810;
+      --border: rgba(249,115,22,0.14);
+      --border-b: rgba(249,115,22,0.28);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg0);
+      color: var(--text);
+      font-family: 'Montserrat', sans-serif;
+      font-size: 15px;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: 'Bebas Neue', sans-serif;
+      letter-spacing: 0.04em;
+      line-height: 1.1;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    /* ── SCROLL ANIMATIONS ── */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .fade-up-d1 { transition-delay: 0.1s; }
+    .fade-up-d2 { transition-delay: 0.2s; }
+    .fade-up-d3 { transition-delay: 0.3s; }
+
+    /* ── NAV ── */
+    .nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 24px;
+      background: rgba(8,5,2,0.9);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.05rem;
+      letter-spacing: 0.14em;
+      color: var(--accent-l);
+    }
+
+    /* ── BUTTONS ── */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      border-radius: 9999px;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      border: none;
+      text-decoration: none;
+    }
+    .btn-sm { padding: 8px 18px; font-size: 12px; }
+    .btn-lg { padding: 16px 36px; font-size: 15px; }
+    .btn-default {
+      background: rgba(249,115,22,0.06);
+      color: var(--text);
+      border: 1px solid rgba(249,115,22,0.25);
+    }
+    .btn-default:hover { background: rgba(249,115,22,0.12); }
+    .btn-solid {
+      background: var(--accent);
+      color: #000;
+      font-weight: 700;
+    }
+    .btn-solid:hover { background: var(--accent-l); box-shadow: 0 0 24px rgba(249,115,22,0.35); }
+    .btn-ghost {
+      background: transparent;
+      color: var(--dim);
+      border: 1px solid rgba(249,115,22,0.2);
+    }
+    .btn-ghost:hover { border-color: rgba(249,115,22,0.4); color: var(--text); }
+    .btn-full { width: 100%; }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 120px 24px 80px;
+      position: relative;
+      overflow: hidden;
+      background: black;
+    }
+    #hero-canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 18px;
+      border-radius: 9999px;
+      border: 1px solid rgba(249,115,22,0.2);
+      background: rgba(249,115,22,0.06);
+      font-size: 12px;
+      color: var(--dim);
+      margin-bottom: 32px;
+      position: relative;
+      z-index: 1;
+    }
+    .hero h1 {
+      font-size: clamp(3.2rem, 10vw, 7rem);
+      position: relative;
+      z-index: 1;
+      margin-bottom: 8px;
+      line-height: 1.05;
+    }
+    .hero-line1 {
+      background: linear-gradient(90deg, #FDBA74 0%, #FCD34D 50%, #F59E0B 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      display: block;
+    }
+    .hero-line2 {
+      background: linear-gradient(90deg, #FCD34D 0%, #F97316 50%, #EF4444 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      display: block;
+      margin-bottom: 24px;
+    }
+    .hero-subtitle {
+      font-size: clamp(1.05rem, 2.2vw, 1.35rem);
+      color: rgba(255, 220, 180, 0.92);
+      max-width: 600px;
+      margin: 0 auto 40px;
+      position: relative;
+      z-index: 1;
+      font-weight: 400;
+      line-height: 1.65;
+      text-shadow: 0 1px 12px rgba(0,0,0,0.6);
+    }
+    .hero-btns {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ── SECTION HELPERS ── */
+    .section { padding: 96px 24px; }
+    .section-narrow { max-width: 672px; margin: 0 auto; }
+    .section-wide { max-width: 1080px; margin: 0 auto; }
+    .label {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+    .section-title {
+      font-size: clamp(2.2rem, 6vw, 3.5rem);
+      color: var(--text);
+      margin-bottom: 16px;
+    }
+    .divider {
+      max-width: 672px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+    .divider-line {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--border) 30%, var(--border) 70%, transparent);
+    }
+
+    /* ── VIDEO ── */
+    .video-section {
+      padding: 80px 24px;
+      background: #0A0A0A;
+      position: relative;
+      overflow: hidden;
+    }
+    .video-glow {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 70% 60% at 50% 50%, rgba(249,115,22,0.1) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .video-wrapper {
+      max-width: 860px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+    .video-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      color: var(--accent);
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .video-title {
+      font-size: clamp(1.6rem, 4vw, 2.4rem);
+      color: var(--text);
+      margin-bottom: 28px;
+    }
+    .video-frame-wrap {
+      position: relative;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid rgba(251,146,60,0.22);
+      box-shadow: 0 0 0 1px rgba(251,146,60,0.08), 0 32px 64px rgba(0,0,0,0.6), 0 0 80px rgba(251,146,60,0.08);
+      padding-bottom: 56.25%;
+      height: 0;
+      background: #000;
+    }
+    .video-frame-wrap iframe {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      border: none;
+      border-radius: 14px;
+    }
+
+    /* ── NARRATIVE ── */
+    .narrative { background: var(--bg1); }
+    .narrative p { font-size: 1rem; line-height: 1.75; margin-bottom: 20px; }
+    .narrative .headline { font-size: 1.15rem; font-weight: 600; color: var(--text); }
+    .author {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-top: 40px;
+    }
+    .author-avatar {
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      background: rgba(249,115,22,0.15);
+      border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; color: var(--accent); font-size: 16px;
+      flex-shrink: 0;
+    }
+    .author-name { font-size: 14px; font-weight: 600; color: var(--text); }
+    .author-sub { font-size: 12px; color: var(--muted); margin-top: 2px; }
+
+    /* ── WHAT'S INSIDE ── */
+    .inside-section { background: var(--bg2); }
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      max-width: 420px;
+      margin: 0 auto 48px;
+    }
+    .stat-card {
+      text-align: center;
+      padding: 20px 12px;
+      border-radius: 16px;
+      background: var(--card);
+      border: 1px solid var(--border);
+    }
+    .stat-val {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2.2rem;
+      color: var(--accent);
+      line-height: 1;
+    }
+    .stat-label { font-size: 11px; color: var(--muted); margin-top: 8px; }
+    .features-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      border: 1px dashed var(--border);
+    }
+    @media (min-width: 600px) { .features-grid { grid-template-columns: 1fr 1fr; } }
+    @media (min-width: 900px) { .features-grid { grid-template-columns: 1fr 1fr 1fr; } }
+    .feature-card {
+      padding: 24px;
+      background: var(--card);
+      border-right: 1px dashed var(--border);
+      border-bottom: 1px dashed var(--border);
+      transition: background 0.2s;
+    }
+    .feature-card:hover { background: var(--card-hov); }
+    .feature-icon { font-size: 20px; margin-bottom: 40px; opacity: 0.7; }
+    .feature-title { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 8px; }
+    .feature-desc { font-size: 12px; color: var(--muted); line-height: 1.6; }
+
+    /* ── LESSONS ── */
+    .lessons-section { background: var(--bg1); }
+    .lesson-item {
+      padding: 32px 0;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      gap: 24px;
+      align-items: flex-start;
+      transition: opacity 0.2s;
+    }
+    .lesson-item:hover { opacity: 0.85; }
+    .lesson-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1rem;
+      color: var(--accent-d);
+      letter-spacing: 0.08em;
+      min-width: 2rem;
+      padding-top: 2px;
+    }
+    .lesson-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(1.2rem, 3vw, 1.5rem);
+      color: var(--text);
+      margin-bottom: 12px;
+      transition: color 0.2s;
+    }
+    .lesson-item:hover .lesson-title { color: #FDBA74; }
+    .lesson-desc { font-size: 13px; color: var(--muted); margin-bottom: 16px; line-height: 1.65; }
+    .tags { display: flex; flex-wrap: wrap; gap: 8px; }
+    .tag {
+      font-size: 11px;
+      padding: 4px 12px;
+      border-radius: 9999px;
+      background: rgba(249,115,22,0.08);
+      color: var(--accent-l);
+      border: 1px solid rgba(249,115,22,0.15);
+    }
+
+    /* ── RESULTS ── */
+    .results-section { background: var(--bg2); position: relative; overflow: hidden; }
+    .results-glow {
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse 80% 50% at 50% 50%, rgba(249,115,22,0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .results-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 40px;
+    }
+    @media (min-width: 600px) { .results-grid { grid-template-columns: repeat(3, 1fr); } }
+    .result-card {
+      padding: 20px;
+      border-radius: 16px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      transition: all 0.2s;
+    }
+    .result-card:hover { border-color: var(--border-b); transform: scale(1.03); }
+    .result-amount {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.5rem;
+      color: var(--accent);
+      line-height: 1;
+    }
+    .result-name { font-size: 13px; font-weight: 500; color: var(--text); margin-top: 4px; }
+    .author-quote {
+      padding: 28px;
+      border-radius: 16px;
+      background: var(--card);
+      border: 1px solid var(--border-b);
+      box-shadow: 0 0 40px rgba(249,115,22,0.06);
+    }
+    .author-quote p { font-size: 15px; color: var(--dim); margin-bottom: 12px; line-height: 1.7; }
+    .author-quote p:last-child { margin-bottom: 0; }
+    .author-quote strong { color: var(--text); font-weight: 600; }
+
+    /* ── FOR WHOM ── */
+    .forwhom-section { background: var(--bg1); }
+    .for-list { margin-top: 32px; display: flex; flex-direction: column; gap: 12px; }
+    .for-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      padding: 16px;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      background: var(--card);
+      font-size: 13px;
+      color: var(--dim);
+      transition: all 0.2s;
+    }
+    .for-item:hover { border-color: var(--border-b); background: var(--card-hov); }
+    .for-arrow { color: var(--accent); font-weight: 700; flex-shrink: 0; }
+
+    /* ── PRICING ── */
+    .pricing-section {
+      background: var(--bg2);
+      position: relative;
+      overflow: hidden;
+    }
+    .pricing-glow {
+      position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+      width: 100%; height: 256px;
+      background: radial-gradient(ellipse 60% 100% at 50% 0%, rgba(249,115,22,0.1) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .urgency-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 18px;
+      border-radius: 9999px;
+      background: rgba(239,68,68,0.1);
+      border: 1px solid rgba(239,68,68,0.25);
+      color: #FCA5A5;
+      font-size: 12px;
+      font-weight: 500;
+      margin-bottom: 40px;
+    }
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+    @media (min-width: 768px) { .pricing-grid { grid-template-columns: 1fr 1fr; } }
+    .price-card {
+      padding: 28px;
+      border-radius: 16px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+    }
+    .price-card.pro {
+      border: 2px solid var(--border-b);
+      box-shadow: 0 0 50px rgba(249,115,22,0.1);
+      position: relative;
+    }
+    .price-badge {
+      position: absolute;
+      top: -14px; left: 24px;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 6px 16px;
+      border-radius: 9999px;
+      background: var(--accent);
+      color: #000;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+    .price-tier {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--muted);
+      margin-bottom: 20px;
+    }
+    .price-card.pro .price-tier { color: var(--accent-l); }
+    .price-amount {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 3rem;
+      color: var(--text);
+      line-height: 1;
+    }
+    .price-card.pro .price-amount { color: var(--accent-l); }
+    .price-old { font-size: 11px; color: var(--faint); text-decoration: line-through; margin-top: 4px; }
+    .price-discount { font-size: 11px; font-weight: 600; color: #4ade80; margin-top: 2px; margin-bottom: 28px; }
+    .price-features { list-style: none; flex: 1; margin-bottom: 28px; display: flex; flex-direction: column; gap: 12px; }
+    .price-features li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 13px;
+      color: var(--dim);
+    }
+    .price-features li span { color: var(--accent); flex-shrink: 0; margin-top: 2px; }
+    .price-card.pro .price-features li span { color: var(--accent-l); }
+
+    /* ── GUARANTEE ── */
+    .guarantee-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 48px;
+    }
+    @media (min-width: 600px) { .guarantee-grid { grid-template-columns: repeat(4, 1fr); } }
+    .guarantee-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 16px;
+      border-radius: 16px;
+      background: var(--card);
+      border: 1px solid var(--border);
+    }
+    .guarantee-icon { font-size: 28px; margin-bottom: 10px; }
+    .guarantee-title { font-size: 12px; font-weight: 600; color: var(--text); margin-bottom: 4px; }
+    .guarantee-desc { font-size: 11px; color: var(--muted); }
+
+    /* ── FAQ ── */
+    .faq-section { background: var(--bg1); }
+    .faq-item {
+      border-bottom: 1px solid var(--border);
+      cursor: pointer;
+    }
+    .faq-q {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 0;
+      gap: 16px;
+    }
+    .faq-q-text {
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--dim);
+      line-height: 1.4;
+      transition: color 0.2s;
+    }
+    .faq-item.open .faq-q-text { color: var(--accent-l); }
+    .faq-toggle {
+      flex-shrink: 0;
+      color: var(--accent);
+      font-size: 20px;
+      font-weight: 300;
+      transition: transform 0.3s;
+      line-height: 1;
+    }
+    .faq-item.open .faq-toggle { transform: rotate(45deg); }
+    .faq-a {
+      overflow: hidden;
+      max-height: 0;
+      transition: max-height 0.35s ease, padding 0.35s ease;
+    }
+    .faq-item.open .faq-a { max-height: 300px; padding-bottom: 20px; }
+    .faq-a p { font-size: 13px; color: var(--muted); line-height: 1.7; }
+
+    /* ── QUESTION CHAT ── */
+    .chat-section { background: var(--bg0); padding: 80px 24px; position: relative; overflow: hidden; }
+    .chat-glow {
+      position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
+      width: 100%; height: 60%;
+      background: radial-gradient(ellipse 60% 40% at 50% 100%, rgba(249,115,22,0.07) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .chat-box {
+      max-width: 672px;
+      margin: 32px auto 0;
+      border-radius: 16px;
+      overflow: hidden;
+      background: rgba(20,12,4,0.9);
+      border: 1px solid var(--border);
+      transition: box-shadow 0.3s;
+    }
+    .chat-box:focus-within { box-shadow: 0 0 30px rgba(249,115,22,0.08); }
+    .chat-chips {
+      padding: 16px 16px 8px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .chat-chip {
+      font-size: 12px;
+      padding: 6px 14px;
+      border-radius: 9999px;
+      background: rgba(249,115,22,0.07);
+      border: 1px solid rgba(249,115,22,0.15);
+      color: var(--dim);
+      cursor: pointer;
+      transition: all 0.2s;
+      font-family: 'Montserrat', sans-serif;
+    }
+    .chat-chip:hover { background: rgba(249,115,22,0.14); transform: scale(1.04); }
+    .chat-input-row {
+      padding: 12px 16px 16px;
+      display: flex;
+      align-items: flex-end;
+      gap: 12px;
+      border-top: 1px solid rgba(249,115,22,0.08);
+    }
+    .chat-textarea {
+      flex: 1;
+      background: transparent;
+      border: none;
+      outline: none;
+      resize: none;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 14px;
+      color: var(--text);
+      min-height: 44px;
+      max-height: 180px;
+      overflow: hidden;
+      line-height: 1.6;
+      padding-top: 8px;
+    }
+    .chat-textarea::placeholder { color: var(--faint); }
+    .chat-send {
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 22px;
+      border-radius: 9999px;
+      font-size: 14px;
+      font-weight: 600;
+      font-family: 'Montserrat', sans-serif;
+      cursor: pointer;
+      border: 1px solid rgba(249,115,22,0.1);
+      background: rgba(249,115,22,0.08);
+      color: var(--muted);
+      transition: all 0.2s;
+    }
+    .chat-send.active {
+      background: var(--accent);
+      color: #000;
+      border-color: transparent;
+      box-shadow: 0 0 20px rgba(249,115,22,0.3);
+    }
+    .chat-success {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 56px 24px;
+      text-align: center;
+    }
+    .chat-success.show { display: flex; }
+    .chat-box.sent .chat-chips,
+    .chat-box.sent .chat-input-row { display: none; }
+    .chat-box.sent .chat-success { display: flex; }
+    .chat-success-icon { font-size: 48px; margin-bottom: 16px; }
+    .chat-success-title { font-size: 18px; font-weight: 600; color: var(--text); margin-bottom: 8px; }
+    .chat-success-sub { font-size: 13px; color: var(--muted); margin-bottom: 24px; }
+    .chat-reset { font-size: 12px; color: var(--muted); text-decoration: underline; text-underline-offset: 4px; cursor: pointer; background: none; border: none; font-family: 'Montserrat', sans-serif; transition: color 0.2s; }
+    .chat-reset:hover { color: #FDBA74; }
+
+    /* ── FINAL CTA ── */
+    .cta-section {
+      background: var(--bg0);
+      padding: 96px 24px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .cta-glow {
+      position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+      width: 100%; height: 100%;
+      background: radial-gradient(ellipse 60% 40% at 50% 0%, rgba(249,115,22,0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .cta-title {
+      font-size: clamp(2.8rem, 8vw, 5rem);
+      color: var(--text);
+      margin-bottom: 24px;
+    }
+    .cta-title span { color: var(--accent); }
+    .cta-sub { font-size: 1.05rem; color: var(--muted); margin-bottom: 40px; line-height: 1.7; }
+    .cta-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+    .cta-note { margin-top: 32px; font-size: 12px; color: var(--faint); }
+
+    /* ── FOOTER ── */
+    .footer {
+      padding: 40px 24px;
+      text-align: center;
+      border-top: 1px solid var(--border);
+      background: var(--bg0);
+    }
+    .footer p { font-size: 12px; color: var(--faint); margin-bottom: 6px; }
+    .footer-oferta {
+      display: inline-block;
+      margin-top: 12px;
+      font-size: 12px;
+      color: var(--muted);
+      text-decoration: underline;
+      text-underline-offset: 4px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      font-family: 'Montserrat', sans-serif;
+      transition: color 0.2s;
+    }
+    .footer-oferta:hover { color: var(--accent-l); }
+
+    /* ── OFERTA MODAL ── */
+    .modal-overlay {
+      position: fixed; inset: 0; z-index: 500;
+      background: rgba(0,0,0,0.85);
+      backdrop-filter: blur(6px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s;
+    }
+    .modal-overlay.open { opacity: 1; pointer-events: all; }
+    .modal-box {
+      width: 100%; max-width: 680px;
+      max-height: 88vh;
+      overflow-y: auto;
+      border-radius: 16px;
+      padding: 40px 32px;
+      background: #140C04;
+      border: 1px solid rgba(249,115,22,0.25);
+      box-shadow: 0 0 60px rgba(249,115,22,0.08);
+      position: relative;
+      transform: scale(0.95) translateY(16px);
+      transition: transform 0.25s;
+    }
+    .modal-overlay.open .modal-box { transform: scale(1) translateY(0); }
+    .modal-close {
+      position: absolute; top: 16px; right: 16px;
+      width: 32px; height: 32px;
+      display: flex; align-items: center; justify-content: center;
+      border-radius: 50%;
+      background: none; border: none;
+      color: var(--muted); font-size: 18px;
+      cursor: pointer; transition: background 0.2s;
+    }
+    .modal-close:hover { background: rgba(249,115,22,0.1); }
+    .modal-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.8rem;
+      color: var(--text);
+      letter-spacing: 0.04em;
+      margin-bottom: 4px;
+    }
+    .modal-sub { font-size: 12px; color: var(--muted); margin-bottom: 32px; }
+    .modal-body { color: var(--dim); font-size: 13px; line-height: 1.75; }
+    .modal-body section { margin-bottom: 24px; }
+    .modal-body .section-head { font-weight: 600; color: var(--text); margin-bottom: 8px; }
+    .modal-body p { margin-bottom: 8px; }
+    .modal-body .accent { color: var(--accent-l); }
+
+    @media (max-width: 480px) {
+      .hero h1 { font-size: 3rem; }
+      .modal-box { padding: 28px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <span class="nav-logo">МАНСУР · ИИ-КУРС</span>
+  <a href="#pricing" class="btn btn-sm btn-default">Купить курс</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <canvas id="hero-canvas"></canvas>
+  <div class="hero-badge fade-up">
+    ⭐⭐⭐⭐⭐&nbsp; Уже более 20 учеников заработали первые деньги с ИИ
+  </div>
+  <h1 class="fade-up fade-up-d1">
+    <span class="hero-line1">ЗАРАБАТЫВАЙ НА ИИ</span>
+    <span class="hero-line2">УЖЕ ЧЕРЕЗ 7 ДНЕЙ</span>
+  </h1>
+  <p class="hero-subtitle fade-up fade-up-d2">
+    5 уроков о том, как продавать услуги на основе ChatGPT и Claude — бизнесам, которые уже ищут таких специалистов
+  </p>
+  <div class="hero-btns fade-up fade-up-d3">
+    <a href="#pricing" class="btn btn-lg btn-solid">Начать за 2 490 ₽</a>
+    <a href="#video-section" class="btn btn-lg btn-ghost" id="watch-btn">Смотреть урок ▶</a>
+  </div>
+</section>
+
+<!-- VIDEO -->
+<section class="video-section" id="video-section">
+  <div class="video-glow"></div>
+  <div class="video-wrapper fade-up">
+    <p class="video-label">СМОТРИ</p>
+    <h2 class="video-title">КАК ЭТО РАБОТАЕТ НА ПРАКТИКЕ</h2>
+    <div class="video-frame-wrap">
+      <iframe
+        id="wistia-iframe"
+        src="https://fast.wistia.net/embed/iframe/59xz7v37fo"
+        title="Wistia video player"
+        allowfullscreen
+        scrolling="no"
+      ></iframe>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><div class="divider-line"></div></div>
+
+<!-- NARRATIVE -->
+<section class="section narrative">
+  <div class="section-narrow">
+    <div class="fade-up">
+      <p class="label">ЧЕСТНО</p>
+      <p class="headline">ИИ уже меняет рынок. Вопрос — с какой стороны ты стоишь.</p>
+      <p style="color:var(--dim); margin-top:20px;">Бизнесы платят за сайты, коммерческие предложения, карусели и контент-планы. Раньше на это уходили недели. Теперь — часы. И они ищут людей, которые умеют делать это быстро через ИИ.</p>
+      <p style="color:var(--dim);">Ты уже пользуешься ChatGPT или Claude. Ты видишь, насколько это мощно. Но ты ещё не продаёшь это другим. Вот где деньги.</p>
+      <p style="color:var(--dim);">Этот курс — не про теорию. Это конкретные услуги, конкретные инструменты и конкретные шаги, которые приводят к первым оплатам. У меня и моих учеников это работает прямо сейчас.</p>
+      <div class="author">
+        <div class="author-avatar">М</div>
+        <div>
+          <p class="author-name">Мансур</p>
+          <p class="author-sub">5+ млн ₽ заработано на ИИ и контенте · 41 000 подписчиков</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><div class="divider-line"></div></div>
+
+<!-- WHAT'S INSIDE -->
+<section class="section inside-section" style="position:relative;overflow:hidden;">
+  <div style="position:absolute;top:0;left:50%;transform:translateX(-50%);width:66%;height:192px;background:radial-gradient(ellipse at 50% 0%, rgba(249,115,22,0.12) 0%, transparent 70%);pointer-events:none;"></div>
+  <div class="section-wide" style="position:relative;z-index:1;">
+    <div class="fade-up" style="max-width:672px;margin:0 auto;">
+      <p class="label">ЧТО ВНУТРИ</p>
+      <h2 class="section-title">5 УРОКОВ — 5 ИСТОЧНИКОВ ДОХОДА</h2>
+      <p style="color:var(--muted);">Каждый урок — это готовая услуга, которую ты можешь продавать бизнесам сразу после просмотра.</p>
+    </div>
+    <div class="stats-grid fade-up fade-up-d2" style="margin-top:40px;">
+      <div class="stat-card"><div class="stat-val">5</div><div class="stat-label">уроков</div></div>
+      <div class="stat-card"><div class="stat-val">4</div><div class="stat-label">ИИ-инструмента</div></div>
+      <div class="stat-card"><div class="stat-val">∞</div><div class="stat-label">доступ навсегда</div></div>
+    </div>
+    <div class="features-grid fade-up fade-up-d3" style="margin-top:0;">
+      <div class="feature-card">
+        <div class="feature-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.7"><path d="M12 3l1.5 3.5L17 8l-3.5 1.5L12 13l-1.5-3.5L7 8l3.5-1.5L12 3z"/><path d="M19 15l.8 2 2 .8-2 .8-.8 2-.8-2-2-.8 2-.8.8-2z"/><path d="M5 17l.6 1.4 1.4.6-1.4.6L5 21l-.6-1.4L3 19l1.4-.6L5 17z"/></svg></div>
+        <div class="feature-title">Услуги ИИ-специалиста</div>
+        <div class="feature-desc">8+ готовых услуг с реальными ценами, которые можно продавать бизнесам прямо сейчас.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.7"><rect x="4" y="4" width="16" height="16" rx="2"/><circle cx="12" cy="12" r="3"/><path d="M12 4v2M12 18v2M4 12h2M18 12h2"/></svg></div>
+        <div class="feature-title">Claude — сайт за 1 час</div>
+        <div class="feature-desc">Создаём полноценный продающий сайт за час и продаём услугу за 3 000–10 000 ₽.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.7"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg></div>
+        <div class="feature-title">Коммерческие предложения</div>
+        <div class="feature-desc">Связка Claude + ChatGPT: продающее КП за 20–30 минут. Одно КП — 2 000–5 000 ₽.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.7"><rect x="2" y="2" width="20" height="20" rx="2"/><rect x="7" y="7" width="3" height="3"/><rect x="14" y="7" width="3" height="3"/><rect x="7" y="14" width="3" height="3"/><rect x="14" y="14" width="3" height="3"/></svg></div>
+        <div class="feature-title">Карусели для соцсетей</div>
+        <div class="feature-desc">ChatGPT + Canva + Midjourney. Карусель за 30 минут — 1 500–3 000 ₽ за штуку.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.7"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></div>
+        <div class="feature-title">Поиск и закрытие клиентов</div>
+        <div class="feature-desc">Топ-5 каналов, скрипты переписок и стратегия выхода на 100 000 ₽ в первый месяц.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.7"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
+        <div class="feature-title">Первые деньги за 7–14 дней</div>
+        <div class="feature-desc">Каждый урок — это готовая услуга. Без портфолио, без опыта, без вложений в рекламу.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><div class="divider-line"></div></div>
+
+<!-- LESSONS -->
+<section class="section lessons-section" id="program">
+  <div class="section-narrow">
+    <div class="fade-up">
+      <p class="label">ПРОГРАММА</p>
+      <h2 class="section-title">ЧТО МЫ РАЗБЕРЁМ</h2>
+    </div>
+    <div style="margin-top:16px;">
+      <div class="lesson-item fade-up">
+        <span class="lesson-num">01</span>
+        <div>
+          <div class="lesson-title">УСЛУГИ ИИ-СПЕЦИАЛИСТА — ЧТО ПРОДАВАТЬ БИЗНЕСУ</div>
+          <p class="lesson-desc">Разберём, какие конкретные услуги вы можете предлагать бизнесам и экспертам уже сегодня. Никакой теории — только живые примеры и реальные чеки. Узнаем, какие задачи бизнес готов делегировать ИИ-специалисту и сколько за это платить.</p>
+          <div class="tags"><span class="tag">8+ услуг с ценами</span><span class="tag">Позиционирование</span><span class="tag">Реальные кейсы</span><span class="tag">Как не демпинговать</span></div>
+        </div>
+      </div>
+      <div class="lesson-item fade-up fade-up-d1">
+        <span class="lesson-num">02</span>
+        <div>
+          <div class="lesson-title">CLAUDE — ПОЛНЫЙ ОБЗОР И СОЗДАНИЕ САЙТА ЗА 1 ЧАС</div>
+          <p class="lesson-desc">Практический урок по работе с Claude. За один час создадим полноценный продающий сайт для клиента. Покажу все фишки, которые превращают Claude из чат-бота в полноценный инструмент заработка.</p>
+          <div class="tags"><span class="tag">Возможности Claude</span><span class="tag">Пошаговое создание сайта</span><span class="tag">Шаблоны промтов</span><span class="tag">Упаковка и продажа услуги</span></div>
+        </div>
+      </div>
+      <div class="lesson-item fade-up fade-up-d2">
+        <span class="lesson-num">03</span>
+        <div>
+          <div class="lesson-title">КОММЕРЧЕСКОЕ ПРЕДЛОЖЕНИЕ ЧЕРЕЗ CLAUDE + CHATGPT</div>
+          <p class="lesson-desc">КП — один из самых высокооплачиваемых контент-продуктов. Покажу связку Claude + ChatGPT, которая создаёт продающие КП для любой ниши за 20–30 минут. Одно КП стоит 2 000–5 000 ₽.</p>
+          <div class="tags"><span class="tag">Структура продающего КП</span><span class="tag">Связка Claude + ChatGPT</span><span class="tag">Готовые шаблоны</span><span class="tag">Как назначать цену</span></div>
+        </div>
+      </div>
+      <div class="lesson-item fade-up fade-up-d1">
+        <span class="lesson-num">04</span>
+        <div>
+          <div class="lesson-title">КАРУСЕЛИ: CHATGPT + CANVA + MIDJOURNEY</div>
+          <p class="lesson-desc">Карусели — самый вирусный формат в соцсетях. Покажу полный процесс: от идеи до готового дизайна. Услугу легко продавать за 1 500–3 000 ₽ за штуку, а делать — за 30 минут.</p>
+          <div class="tags"><span class="tag">Идеи через ChatGPT</span><span class="tag">Тексты и сценарии</span><span class="tag">Дизайн в Canva + Midjourney</span><span class="tag">Продажа пакетами</span></div>
+        </div>
+      </div>
+      <div class="lesson-item fade-up fade-up-d2">
+        <span class="lesson-num">05</span>
+        <div>
+          <div class="lesson-title">ГДЕ НАЙТИ КЛИЕНТА И ЗАКРЫТЬ ЕГО НА ОПЛАТУ</div>
+          <p class="lesson-desc">Самый практичный урок. Где искать клиентов и как закрывать их на деньги. Рабочие каналы, скрипты переписок и реальные подходы, которые мы с учениками используем прямо сейчас.</p>
+          <div class="tags"><span class="tag">Топ-5 каналов поиска</span><span class="tag">Скрипты переписок</span><span class="tag">Как презентовать услугу</span><span class="tag">Стратегия на 100 000 ₽</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><div class="divider-line"></div></div>
+
+<!-- RESULTS -->
+<section class="section results-section">
+  <div class="results-glow"></div>
+  <div class="section-narrow" style="position:relative;z-index:1;">
+    <div class="fade-up">
+      <p class="label">РЕЗУЛЬТАТЫ</p>
+      <h2 class="section-title">ОНИ УЖЕ ЗАРАБАТЫВАЮТ</h2>
+      <p style="color:var(--muted);margin-bottom:40px;font-size:13px;">Реальные результаты учеников. Без фотошопа, без накрутки.</p>
+    </div>
+    <div class="results-grid">
+      <div class="result-card fade-up"><div class="result-amount">180 000 ₽</div><div class="result-name">Нисо</div></div>
+      <div class="result-card fade-up fade-up-d1"><div class="result-amount">90 000 ₽</div><div class="result-name">Карина</div></div>
+      <div class="result-card fade-up fade-up-d2"><div class="result-amount">90 000 ₽</div><div class="result-name">Юсуф</div></div>
+      <div class="result-card fade-up"><div class="result-amount">80 000+ ₽</div><div class="result-name">Хабибулла</div></div>
+      <div class="result-card fade-up fade-up-d1"><div class="result-amount">62 000 ₽</div><div class="result-name">Али</div></div>
+      <div class="result-card fade-up fade-up-d2"><div class="result-amount">60 000 ₽</div><div class="result-name">Мухаммад</div></div>
+    </div>
+    <div class="author-quote fade-up fade-up-d1">
+      <p>Я сам зарабатываю <strong>5+ миллионов рублей в год</strong> через контент и ИИ-услуги. Начинал с нуля. Без связей, без большого бюджета.</p>
+      <p>В этом курсе — концентрат того, что работает прямо сейчас.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><div class="divider-line"></div></div>
+
+<!-- FOR WHOM -->
+<section class="section forwhom-section">
+  <div class="section-narrow">
+    <div class="fade-up">
+      <p class="label">ДЛЯ КОГО</p>
+      <h2 class="section-title">ЭТО ДЛЯ ТЕБЯ, ЕСЛИ...</h2>
+    </div>
+    <div class="for-list">
+      <div class="for-item fade-up"><span class="for-arrow">→</span><span>Хочешь зарабатывать онлайн, но не знаешь с чего начать</span></div>
+      <div class="for-item fade-up fade-up-d1"><span class="for-arrow">→</span><span>Уже пользуешься ИИ, но только для личных задач</span></div>
+      <div class="for-item fade-up fade-up-d2"><span class="for-arrow">→</span><span>Хочешь первые деньги без портфолио и опыта</span></div>
+      <div class="for-item fade-up"><span class="for-arrow">→</span><span>Готов уделить 1–2 часа в день и выйти на доход в этом месяце</span></div>
+      <div class="for-item fade-up fade-up-d1"><span class="for-arrow">→</span><span>Ищешь дополнительный доход без ухода с основной работы</span></div>
+      <div class="for-item fade-up fade-up-d2"><span class="for-arrow">→</span><span>Планируешь в будущем создать своё агентство</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><div class="divider-line"></div></div>
+
+<!-- PRICING -->
+<section class="section pricing-section" id="pricing">
+  <div class="pricing-glow"></div>
+  <div class="section-narrow" style="position:relative;z-index:1;">
+    <div class="fade-up">
+      <p class="label">ЦЕНА</p>
+      <h2 class="section-title">ВЫБЕРИ СВОЙ ФОРМАТ</h2>
+      <div class="urgency-badge">🔥 Цена повысится после продажи 50 мест</div>
+    </div>
+    <div class="pricing-grid">
+      <!-- BASIC -->
+      <div class="price-card fade-up">
+        <p class="price-tier">БАЗОВЫЙ</p>
+        <div class="price-amount">1 490 ₽</div>
+        <p class="price-old">Обычная цена: 15 000 ₽</p>
+        <p class="price-discount">Скидка 90%</p>
+        <ul class="price-features">
+          <li><span>✓</span>5 видеоуроков в записи</li>
+          <li><span>✓</span>Доступ навсегда</li>
+          <li><span>✓</span>Шаблоны промтов</li>
+          <li><span>✓</span>Список 8+ услуг с ценами</li>
+          <li><span>✓</span>Скрипты для поиска клиентов</li>
+        </ul>
+        <a href="https://payform.ru/3wbiB4T/" target="_blank" class="btn btn-lg btn-default btn-full">Купить за 1 490 ₽ →</a>
+      </div>
+      <!-- PRO -->
+      <div class="price-card pro fade-up fade-up-d1">
+        <div class="price-badge">Рекомендуем</div>
+        <p class="price-tier">ПРО</p>
+        <div class="price-amount">2 490 ₽</div>
+        <p class="price-old">Обычная цена: 30 000 ₽</p>
+        <p class="price-discount">Скидка 92%</p>
+        <ul class="price-features">
+          <li><span>✓</span>Всё из тарифа «Базовый»</li>
+          <li><span>✓</span>Бонусный урок: 5+ ИИ-инструментов</li>
+          <li><span>✓</span>Готовые КП-шаблоны под ниши</li>
+          <li><span>✓</span>Чат с куратором 30 дней</li>
+          <li><span>✓</span>Разбор твоей первой сделки</li>
+          <li><span>✓</span>Приоритетный доступ к новым материалам</li>
+        </ul>
+        <a href="https://payform.ru/5qbiB5R/" target="_blank" class="btn btn-lg btn-solid btn-full">Купить за 2 490 ₽ →</a>
+      </div>
+    </div>
+    <!-- GUARANTEE -->
+    <div class="guarantee-grid fade-up fade-up-d2">
+      <!-- SuccessIcon -->
+      <div class="guarantee-item">
+        <svg class="gi-icon" id="gi-success" viewBox="0 0 40 40" fill="none" width="36" height="36">
+          <circle cx="20" cy="20" r="16" stroke="#FB923C" stroke-width="2" id="gi-success-circle"/>
+          <circle cx="20" cy="20" r="16" stroke="#FB923C" stroke-width="2" stroke-linecap="round"
+            stroke-dasharray="25 75" id="gi-success-spin" style="transform-origin:20px 20px;display:none;">
+            <animateTransform attributeName="transform" type="rotate" from="0" to="360" dur="1s" repeatCount="indefinite"/>
+          </circle>
+          <path d="M12 20l6 6 10-12" stroke="#FB923C" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
+            id="gi-success-check" style="stroke-dasharray:30;stroke-dashoffset:30;transition:stroke-dashoffset 0.4s ease 0.2s;"/>
+        </svg>
+        <div class="guarantee-title">Гарантия 7 дней</div>
+        <div class="guarantee-desc">Не понравится — вернём деньги</div>
+      </div>
+      <!-- DownloadDoneIcon -->
+      <div class="guarantee-item">
+        <svg class="gi-icon" id="gi-download" viewBox="0 0 40 40" fill="none" width="36" height="36">
+          <path d="M8 28v4a2 2 0 002 2h20a2 2 0 002-2v-4" stroke="#FB923C" stroke-width="2" stroke-linecap="round"/>
+          <g id="gi-dl-arrow" style="transition:opacity 0.3s,transform 0.3s;transform-origin:20px 16px;">
+            <line x1="20" y1="6" x2="20" y2="24" stroke="#FB923C" stroke-width="2" stroke-linecap="round"/>
+            <polyline points="14,18 20,24 26,18" stroke="#FB923C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </g>
+          <path d="M14 22l6 6 8-10" stroke="#FB923C" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
+            id="gi-dl-check" style="stroke-dasharray:30;stroke-dashoffset:30;transition:stroke-dashoffset 0.35s ease;opacity:0;"/>
+        </svg>
+        <div class="guarantee-title">Доступ сразу</div>
+        <div class="guarantee-desc">Материалы после оплаты</div>
+      </div>
+      <!-- ToggleIcon -->
+      <div class="guarantee-item">
+        <svg class="gi-icon" id="gi-toggle" viewBox="0 0 40 40" fill="none" width="36" height="36">
+          <rect x="5" y="13" width="30" height="14" rx="7" fill="#FB923C" id="gi-tog-bg" style="opacity:0.08;transition:opacity 0.3s;"/>
+          <rect x="5" y="13" width="30" height="14" rx="7" stroke="#FB923C" stroke-width="2" id="gi-tog-border" style="opacity:0.4;transition:opacity 0.3s;"/>
+          <circle cy="20" r="5" fill="#FB923C" id="gi-tog-dot" style="transition:cx 0.35s cubic-bezier(0.34,1.56,0.64,1);" cx="12"/>
+        </svg>
+        <div class="guarantee-title">Навсегда твоё</div>
+        <div class="guarantee-desc">Без ограничений по времени</div>
+      </div>
+      <!-- HeartIcon -->
+      <div class="guarantee-item">
+        <svg class="gi-icon" id="gi-heart" viewBox="0 0 40 40" fill="none" width="36" height="36">
+          <path d="M20 34s-12-7.5-12-16a7.5 7.5 0 0112-6 7.5 7.5 0 0112 6c0 8.5-12 16-12 16z"
+            id="gi-heart-path" stroke="#FB923C" stroke-width="2" fill="none"
+            style="transform-origin:20px 22px;transition:fill 0.3s,transform 0.4s cubic-bezier(0.32,0.72,0,1),stroke 0.3s;"/>
+        </svg>
+        <div class="guarantee-title">Реальный результат</div>
+        <div class="guarantee-desc">20+ учеников уже зарабатывают</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><div class="divider-line"></div></div>
+
+<!-- FAQ -->
+<section class="section faq-section">
+  <div class="section-narrow">
+    <div class="fade-up">
+      <p class="label">ВОПРОСЫ</p>
+      <h2 class="section-title">ПРЕЖДЕ ЧЕМ СПРОСИТЬ</h2>
+    </div>
+    <div style="margin-top:32px;">
+      <div class="faq-item fade-up">
+        <div class="faq-q"><span class="faq-q-text">Нужен ли опыт в ИИ или программировании?</span><span class="faq-toggle">+</span></div>
+        <div class="faq-a"><p>Нет. Курс рассчитан на полных новичков. Если ты умеешь пользоваться смартфоном и интернетом — этого достаточно. Начинаем с нуля.</p></div>
+      </div>
+      <div class="faq-item fade-up">
+        <div class="faq-q"><span class="faq-q-text">За сколько времени заработать первые деньги?</span><span class="faq-toggle">+</span></div>
+        <div class="faq-a"><p>Большинство учеников получают первый оплаченный заказ в течение 7–14 дней после прохождения курса. Всё зависит от твоей активности.</p></div>
+      </div>
+      <div class="faq-item fade-up">
+        <div class="faq-q"><span class="faq-q-text">Нужно ли платить за ChatGPT или Claude?</span><span class="faq-toggle">+</span></div>
+        <div class="faq-a"><p>Для старта хватит бесплатных версий. Платные подписки ускоряют работу, но они не обязательны для первых заработков.</p></div>
+      </div>
+      <div class="faq-item fade-up">
+        <div class="faq-q"><span class="faq-q-text">Чем тариф «Про» отличается от «Базового»?</span><span class="faq-toggle">+</span></div>
+        <div class="faq-a"><p>В Про версии — дополнительный урок по 5+ ИИ-инструментам, готовые КП-шаблоны под разные ниши, чат с куратором на 30 дней и разбор твоей первой сделки.</p></div>
+      </div>
+      <div class="faq-item fade-up">
+        <div class="faq-q"><span class="faq-q-text">Можно ли вернуть деньги?</span><span class="faq-toggle">+</span></div>
+        <div class="faq-a"><p>Да. Если в течение 7 дней тебе не понравится — вернём всю сумму без вопросов.</p></div>
+      </div>
+      <div class="faq-item fade-up">
+        <div class="faq-q"><span class="faq-q-text">Это основной доход или подработка?</span><span class="faq-toggle">+</span></div>
+        <div class="faq-a"><p>Зависит от тебя. Многие ученики начинали с подработки и вышли на 100 000+ ₽ в месяц. Курс даёт систему — ты решаешь, как её применять.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><div class="divider-line"></div></div>
+
+<!-- QUESTION CHAT -->
+<section class="chat-section">
+  <div class="chat-glow"></div>
+  <div class="section-narrow" style="position:relative;z-index:1;">
+    <div class="fade-up">
+      <p class="label">ЕСТЬ ВОПРОС?</p>
+      <h2 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(2rem,5vw,3rem);color:var(--text);margin-bottom:8px;">НАПИШИ — Я ОТВЕЧУ</h2>
+      <p style="font-size:13px;color:var(--muted);">Оставь вопрос — отвечу в течение нескольких часов</p>
+    </div>
+    <div class="chat-box" id="chat-box">
+      <div class="chat-chips">
+        <button class="chat-chip" onclick="setQuestion(this)">Подойдёт ли это новичку без опыта?</button>
+        <button class="chat-chip" onclick="setQuestion(this)">Сколько времени нужно в день?</button>
+        <button class="chat-chip" onclick="setQuestion(this)">Когда получу первые деньги?</button>
+        <button class="chat-chip" onclick="setQuestion(this)">Чем отличаются тарифы?</button>
+      </div>
+      <div class="chat-input-row">
+        <textarea class="chat-textarea" id="chat-input" placeholder="Напиши свой вопрос..." rows="1" oninput="autoResize(this); updateSendBtn();" onkeydown="handleChatKey(event)"></textarea>
+        <button class="chat-send" id="chat-send-btn" onclick="sendQuestion()">✈ Отправить</button>
+      </div>
+      <div class="chat-success">
+        <div class="chat-success-icon">
+          <svg viewBox="0 0 48 48" fill="none" width="56" height="56">
+            <circle cx="24" cy="24" r="20" stroke="#F97316" stroke-width="2.5"/>
+            <path d="M14 24l7 7 13-14" stroke="#F97316" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"
+              style="stroke-dasharray:36;stroke-dashoffset:36;animation:draw-check 0.5s ease 0.2s forwards;"/>
+          </svg>
+          <style>@keyframes draw-check{to{stroke-dashoffset:0}}</style>
+        </div>
+        <div class="chat-success-title">Вопрос отправлен!</div>
+        <div class="chat-success-sub">Отвечу в ближайшее время</div>
+        <button class="chat-reset" onclick="resetChat()">Задать ещё вопрос</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><div class="divider-line"></div></div>
+
+<!-- FINAL CTA -->
+<section class="cta-section">
+  <div class="cta-glow"></div>
+  <div style="position:relative;z-index:1;">
+    <p class="label">ПОСЛЕДНИЙ ШАГ</p>
+    <h2 class="cta-title">НАЧНИ ЗАРАБАТЫВАТЬ <span>НА ИИ СЕГОДНЯ</span></h2>
+    <p class="cta-sub">5 уроков. Реальные инструменты. Конкретные деньги.<br>Пока другие думают — ты уже зарабатываешь.</p>
+    <div class="cta-btns">
+      <a href="#pricing" class="btn btn-lg btn-solid">Начать за 2 490 ₽</a>
+      <a href="https://t.me/themmancur" target="_blank" class="btn btn-lg btn-ghost">Задать вопрос в Telegram</a>
+    </div>
+    <p class="cta-note">Гарантия возврата 7 дней · Доступ сразу после оплаты · Навсегда твоё</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <p>© 2025 Мансур — ИИ-специалист и контент-маркетолог</p>
+  <p>Поставщик: Уммалатов Мансур · ИНН: 201403510971</p>
+  <p>Результаты учеников индивидуальны и зависят от их усилий и применения материала.</p>
+  <button class="footer-oferta" onclick="openOferta()">Договор публичной оферты</button>
+</footer>
+
+<!-- OFERTA MODAL -->
+<div class="modal-overlay" id="oferta-modal" onclick="closeOferta(event)">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeOfertaBtn()">✕</button>
+    <div class="modal-title">ДОГОВОР ПУБЛИЧНОЙ ОФЕРТЫ</div>
+    <div class="modal-sub">на оказание информационно-консультационных услуг</div>
+    <div class="modal-body">
+      <section>
+        <p class="section-head">1. ОБЩИЕ ПОЛОЖЕНИЯ</p>
+        <p>1.1. Настоящий документ является публичной офертой Уммалатова Мансура (далее — Исполнитель, ИНН: 201403510971) и содержит все существенные условия оказания информационно-консультационных услуг в форме онлайн-курса.</p>
+        <p>1.2. Акцептом настоящей оферты является факт оплаты услуг Исполнителя. С момента оплаты договор считается заключённым.</p>
+        <p>1.3. Оферта действует бессрочно до её отзыва Исполнителем.</p>
+      </section>
+      <section>
+        <p class="section-head">2. ПРЕДМЕТ ДОГОВОРА</p>
+        <p>2.1. Исполнитель обязуется предоставить Заказчику доступ к онлайн-курсу «Зарабатывай на ИИ уже через 7 дней» в объёме выбранного тарифа.</p>
+        <p>2.2. Услуги оказываются дистанционно посредством предоставления доступа к видеоматериалам, текстовым материалам и шаблонам.</p>
+        <p>2.3. Доступ предоставляется в течение 24 часов с момента подтверждения оплаты.</p>
+      </section>
+      <section>
+        <p class="section-head">3. СТОИМОСТЬ И ПОРЯДОК ОПЛАТЫ</p>
+        <p>3.1. Стоимость услуг определяется выбранным тарифом на момент оплаты:</p>
+        <p>— Тариф «Базовый»: 1 490 рублей;</p>
+        <p>— Тариф «Про»: 2 490 рублей.</p>
+        <p>3.2. Оплата производится в рублях РФ через платёжные системы, указанные на сайте.</p>
+      </section>
+      <section>
+        <p class="section-head">4. ПРАВА И ОБЯЗАННОСТИ СТОРОН</p>
+        <p>4.1. Исполнитель обязуется предоставить доступ к материалам курса в соответствии с выбранным тарифом.</p>
+        <p>4.2. Заказчик обязуется использовать материалы только в личных целях. Перепродажа, копирование и распространение материалов третьим лицам запрещены.</p>
+        <p>4.3. Исполнитель вправе вносить изменения в материалы курса, не снижающие его качества.</p>
+      </section>
+      <section>
+        <p class="section-head">5. ВОЗВРАТ ДЕНЕЖНЫХ СРЕДСТВ</p>
+        <p>5.1. Заказчик вправе потребовать возврата полной стоимости в течение 7 (семи) календарных дней с момента оплаты, если не воспользовался более чем одним уроком курса.</p>
+        <p>5.2. Для возврата необходимо направить заявку в Telegram: <span class="accent">@themmancur</span>.</p>
+        <p>5.3. Возврат осуществляется в течение 10 рабочих дней на реквизиты, с которых была произведена оплата.</p>
+      </section>
+      <section>
+        <p class="section-head">6. ОТВЕТСТВЕННОСТЬ</p>
+        <p>6.1. Исполнитель не гарантирует конкретный финансовый результат. Результат зависит от личных усилий и действий Заказчика.</p>
+        <p>6.2. Ответственность Исполнителя ограничена стоимостью оплаченных услуг.</p>
+      </section>
+      <section>
+        <p class="section-head">7. РЕКВИЗИТЫ ИСПОЛНИТЕЛЯ</p>
+        <p>Поставщик: Уммалатов Мансур</p>
+        <p>ИНН: 201403510971</p>
+        <p>Контакт: <span class="accent">@themmancur</span> (Telegram)</p>
+      </section>
+    </div>
+  </div>
+</div>
+
+<!-- WISTIA API -->
+<script src="https://fast.wistia.com/assets/external/E-v1.js" async></script>
+
+<script>
+  // ── WEBGL HERO SHADER ──
+  (function() {
+    const canvas = document.getElementById('hero-canvas');
+    const gl = canvas.getContext('webgl2');
+    if (!gl) return;
+    const dpr = Math.max(1, 0.5 * window.devicePixelRatio);
+    function resize() {
+      canvas.width = window.innerWidth * dpr;
+      canvas.height = window.innerHeight * dpr;
+      gl.viewport(0, 0, canvas.width, canvas.height);
+    }
+    resize();
+    window.addEventListener('resize', resize);
+
+    const vertSrc = `#version 300 es
+precision highp float;
+in vec4 position;
+void main(){gl_Position=position;}`;
+
+    const fragSrc = `#version 300 es
+precision highp float;
+out vec4 O;
+uniform vec2 resolution;
+uniform float time;
+#define FC gl_FragCoord.xy
+#define T time
+#define R resolution
+#define MN min(R.x,R.y)
+float rnd(vec2 p){p=fract(p*vec2(12.9898,78.233));p+=dot(p,p+34.56);return fract(p.x*p.y);}
+float noise(in vec2 p){vec2 i=floor(p),f=fract(p),u=f*f*(3.-2.*f);float a=rnd(i),b=rnd(i+vec2(1,0)),c=rnd(i+vec2(0,1)),d=rnd(i+1.);return mix(mix(a,b,u.x),mix(c,d,u.x),u.y);}
+float fbm(vec2 p){float t=.0,a=1.;mat2 m=mat2(1.,-.5,.2,1.2);for(int i=0;i<5;i++){t+=a*noise(p);p*=2.*m;a*=.5;}return t;}
+float clouds(vec2 p){float d=1.,t=.0;for(float i=.0;i<3.;i++){float a=d*fbm(i*10.+p.x*.2+.2*(1.+i)*p.y+d+i*i+p);t=mix(t,d,a);d=a;p*=2./(i+1.);}return t;}
+void main(void){
+  vec2 uv=(FC-.5*R)/MN,st=uv*vec2(2,1);
+  vec3 col=vec3(0);
+  float bg=clouds(vec2(st.x+T*.5,-st.y));
+  uv*=1.-.3*(sin(T*.2)*.5+.5);
+  for(float i=1.;i<12.;i++){
+    uv+=.1*cos(i*vec2(.1+.01*i,.8)+i*i+T*.5+.1*uv.x);
+    vec2 p=uv;
+    float d=length(p);
+    col+=.00125/d*(cos(sin(i)*vec3(1,2,3))+1.);
+    float b=noise(i+p+bg*1.731);
+    col+=.002*b/length(max(p,vec2(b*p.x*.02,p.y)));
+    col=mix(col,vec3(bg*.25,bg*.137,bg*.05),d);
+  }
+  O=vec4(col,1);
+}`;
+
+    function compile(type, src) {
+      const s = gl.createShader(type);
+      gl.shaderSource(s, src);
+      gl.compileShader(s);
+      return s;
+    }
+    const prog = gl.createProgram();
+    gl.attachShader(prog, compile(gl.VERTEX_SHADER, vertSrc));
+    gl.attachShader(prog, compile(gl.FRAGMENT_SHADER, fragSrc));
+    gl.linkProgram(prog);
+
+    const buf = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,1,-1,-1,1,1,1,-1]), gl.STATIC_DRAW);
+    const pos = gl.getAttribLocation(prog, 'position');
+    gl.enableVertexAttribArray(pos);
+    gl.vertexAttribPointer(pos, 2, gl.FLOAT, false, 0, 0);
+
+    const uRes = gl.getUniformLocation(prog, 'resolution');
+    const uTime = gl.getUniformLocation(prog, 'time');
+
+    function render(now) {
+      gl.useProgram(prog);
+      gl.uniform2f(uRes, canvas.width, canvas.height);
+      gl.uniform1f(uTime, now * 1e-3);
+      gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+      requestAnimationFrame(render);
+    }
+    requestAnimationFrame(render);
+  })();
+
+  // ── SCROLL ANIMATIONS ──
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+  }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
+  // small delay so hero elements animate in on load, not pop instantly
+  setTimeout(() => {
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+  }, 100);
+
+  // ── FAQ ──
+  document.querySelectorAll('.faq-item').forEach(item => {
+    item.querySelector('.faq-q').addEventListener('click', () => {
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+    });
+  });
+
+  // ── CHAT ──
+  function setQuestion(btn) {
+    const input = document.getElementById('chat-input');
+    input.value = btn.textContent;
+    autoResize(input);
+    updateSendBtn();
+    input.focus();
+  }
+  function autoResize(el) {
+    el.style.height = '44px';
+    el.style.height = Math.min(el.scrollHeight, 180) + 'px';
+  }
+  function updateSendBtn() {
+    const val = document.getElementById('chat-input').value.trim();
+    const btn = document.getElementById('chat-send-btn');
+    btn.classList.toggle('active', val.length > 0);
+  }
+  function handleChatKey(e) {
+    if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendQuestion(); }
+  }
+  function sendQuestion() {
+    const val = document.getElementById('chat-input').value.trim();
+    if (!val) return;
+    document.getElementById('chat-box').classList.add('sent');
+  }
+  function resetChat() {
+    document.getElementById('chat-input').value = '';
+    document.getElementById('chat-box').classList.remove('sent');
+    updateSendBtn();
+  }
+
+  // ── ANIMATED ICONS ──
+  function toggleSuccess(done) {
+    document.getElementById('gi-success-spin').style.display = done ? 'none' : '';
+    const circle = document.getElementById('gi-success-circle');
+    circle.style.opacity = done ? '1' : '0.4';
+    const check = document.getElementById('gi-success-check');
+    check.style.strokeDashoffset = done ? '0' : '30';
+  }
+  function toggleDownload(done) {
+    const arrow = document.getElementById('gi-dl-arrow');
+    const check = document.getElementById('gi-dl-check');
+    arrow.style.opacity = done ? '0' : '1';
+    arrow.style.transform = done ? 'translateY(8px)' : 'translateY(0)';
+    check.style.opacity = done ? '1' : '0';
+    check.style.strokeDashoffset = done ? '0' : '30';
+  }
+  function toggleToggle(on) {
+    document.getElementById('gi-tog-dot').setAttribute('cx', on ? '28' : '12');
+    document.getElementById('gi-tog-bg').style.opacity = on ? '0.2' : '0.08';
+    document.getElementById('gi-tog-border').style.opacity = on ? '1' : '0.4';
+  }
+  function toggleHeart(filled) {
+    const p = document.getElementById('gi-heart-path');
+    p.style.fill = filled ? '#F97316' : 'none';
+    p.style.stroke = filled ? '#F97316' : '#FB923C';
+    p.style.transform = filled ? 'scale(1.25)' : 'scale(1)';
+    setTimeout(() => { if (filled) p.style.transform = 'scale(1)'; }, 200);
+  }
+  // auto-cycle each icon independently
+  let s=false, d=false, t=false, h=false;
+  toggleSuccess(s); toggleDownload(d); toggleToggle(t); toggleHeart(h);
+  setInterval(() => { s=!s; toggleSuccess(s); }, 2200);
+  setInterval(() => { d=!d; toggleDownload(d); }, 2400);
+  setInterval(() => { t=!t; toggleToggle(t); }, 1800);
+  setInterval(() => { h=!h; toggleHeart(h); }, 2000);
+
+  // ── WATCH BTN AUTOPLAY ──
+  document.getElementById('watch-btn').addEventListener('click', function(e) {
+    e.preventDefault();
+    document.getElementById('video-section').scrollIntoView({ behavior: 'smooth' });
+    setTimeout(() => {
+      window._wq = window._wq || [];
+      window._wq.push({ id: '59xz7v37fo', onReady: v => v.play() });
+    }, 700);
+  });
+
+  // ── OFERTA MODAL ──
+  function openOferta() { document.getElementById('oferta-modal').classList.add('open'); document.body.style.overflow = 'hidden'; }
+  function closeOfertaBtn() { document.getElementById('oferta-modal').classList.remove('open'); document.body.style.overflow = ''; }
+  function closeOferta(e) { if (e.target === document.getElementById('oferta-modal')) closeOfertaBtn(); }
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeOfertaBtn(); });
+</script>
+</body>
+</html>
