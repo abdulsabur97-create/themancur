@@ -1,24 +1,12 @@
 import React, { useRef, useEffect } from 'react';
 
 interface HeroProps {
-  trustBadge?: {
-    text: string;
-    icons?: string[];
-  };
-  headline: {
-    line1: string;
-    line2: string;
-  };
+  trustBadge?: { text: string; icons?: string[] };
+  headline: { line1: string; line2: string };
   subtitle: string;
   buttons?: {
-    primary?: {
-      text: string;
-      onClick?: () => void;
-    };
-    secondary?: {
-      text: string;
-      onClick?: () => void;
-    };
+    primary?: { text: string; onClick?: () => void };
+    secondary?: { text: string; onClick?: () => void };
   };
   className?: string;
 }
@@ -30,10 +18,15 @@ const useShaderBackground = () => {
   useEffect(() => {
     if (!canvasRef.current) return;
     const canvas = canvasRef.current;
-    const gl = canvas.getContext('webgl2');
-    if (!gl) return;
 
-    const dpr = Math.max(1, 0.5 * window.devicePixelRatio);
+    // Detect mobile
+    const isMobile = window.innerWidth < 768;
+
+    const gl = canvas.getContext('webgl2');
+    if (!gl) return; // fallback: CSS gradient via bg-black already on canvas
+
+    // Much lower resolution on mobile to prevent lag
+    const dpr = isMobile ? 0.2 : Math.min(0.5, 0.5 * window.devicePixelRatio);
 
     const resize = () => {
       canvas.width = window.innerWidth * dpr;
@@ -47,8 +40,9 @@ precision highp float;
 in vec4 position;
 void main(){gl_Position=position;}`;
 
+    // Simplified shader for mobile (fewer iterations)
     const fragSrc = `#version 300 es
-precision highp float;
+precision ${isMobile ? 'mediump' : 'highp'} float;
 out vec4 O;
 uniform vec2 resolution;
 uniform float time;
@@ -58,14 +52,14 @@ uniform float time;
 #define MN min(R.x,R.y)
 float rnd(vec2 p){p=fract(p*vec2(12.9898,78.233));p+=dot(p,p+34.56);return fract(p.x*p.y);}
 float noise(in vec2 p){vec2 i=floor(p),f=fract(p),u=f*f*(3.-2.*f);float a=rnd(i),b=rnd(i+vec2(1,0)),c=rnd(i+vec2(0,1)),d=rnd(i+1.);return mix(mix(a,b,u.x),mix(c,d,u.x),u.y);}
-float fbm(vec2 p){float t=.0,a=1.;mat2 m=mat2(1.,-.5,.2,1.2);for(int i=0;i<5;i++){t+=a*noise(p);p*=2.*m;a*=.5;}return t;}
-float clouds(vec2 p){float d=1.,t=.0;for(float i=.0;i<3.;i++){float a=d*fbm(i*10.+p.x*.2+.2*(1.+i)*p.y+d+i*i+p);t=mix(t,d,a);d=a;p*=2./(i+1.);}return t;}
+float fbm(vec2 p){float t=.0,a=1.;mat2 m=mat2(1.,-.5,.2,1.2);for(int i=0;i<${isMobile ? 2 : 5};i++){t+=a*noise(p);p*=2.*m;a*=.5;}return t;}
+float clouds(vec2 p){float d=1.,t=.0;for(float i=.0;i<${isMobile ? 2. : 3.};i++){float a=d*fbm(i*10.+p.x*.2+.2*(1.+i)*p.y+d+i*i+p);t=mix(t,d,a);d=a;p*=2./(i+1.);}return t;}
 void main(void){
   vec2 uv=(FC-.5*R)/MN,st=uv*vec2(2,1);
   vec3 col=vec3(0);
   float bg=clouds(vec2(st.x+T*.5,-st.y));
   uv*=1.-.3*(sin(T*.2)*.5+.5);
-  for(float i=1.;i<12.;i++){
+  for(float i=1.;i<${isMobile ? 6. : 12.};i++){
     uv+=.1*cos(i*vec2(.1+.01*i,.8)+i*i+T*.5+.1*uv.x);
     vec2 p=uv;
     float d=length(p);
@@ -101,11 +95,23 @@ void main(void){
     const uRes = gl.getUniformLocation(prog, 'resolution');
     const uTime = gl.getUniformLocation(prog, 'time');
 
+    // Throttle on mobile: render at ~20fps instead of 60fps
+    let lastRender = 0;
+    const fpsLimit = isMobile ? 20 : 60;
+    const interval = 1000 / fpsLimit;
+
     const render = (now: number) => {
-      gl.useProgram(prog);
-      gl.uniform2f(uRes, canvas.width, canvas.height);
-      gl.uniform1f(uTime, now * 1e-3);
-      gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+      if (document.hidden) {
+        animationFrameRef.current = requestAnimationFrame(render);
+        return;
+      }
+      if (now - lastRender >= interval) {
+        gl.useProgram(prog);
+        gl.uniform2f(uRes, canvas.width, canvas.height);
+        gl.uniform1f(uTime, now * 1e-3);
+        gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+        lastRender = now;
+      }
       animationFrameRef.current = requestAnimationFrame(render);
     };
 
@@ -126,7 +132,8 @@ const Hero: React.FC<HeroProps> = ({ trustBadge, headline, subtitle, buttons, cl
   const canvasRef = useShaderBackground();
 
   return (
-    <div className={`relative w-full h-screen overflow-hidden bg-black ${className}`}>
+    <div className={`relative w-full h-screen overflow-hidden ${className}`}
+      style={{ background: 'linear-gradient(135deg, #0C0501 0%, #1a0800 50%, #0C0501 100%)' }}>
       <style>{`
         @keyframes fade-in-down { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes fade-in-up { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
@@ -139,7 +146,15 @@ const Hero: React.FC<HeroProps> = ({ trustBadge, headline, subtitle, buttons, cl
         @keyframes gradient-shift { 0%,100%{background-position:0% 50%} 50%{background-position:100% 50%} }
         .animate-gradient { background-size: 200% 200%; animation: gradient-shift 3s ease infinite; }
       `}</style>
-      <canvas ref={canvasRef} className="absolute inset-0 w-full h-full object-contain touch-none" style={{ background: 'black' }} />
+
+      {/* WebGL canvas - фоновая анимация */}
+      <canvas
+        ref={canvasRef}
+        className="absolute inset-0 w-full h-full"
+        style={{ opacity: 0.9 }}
+      />
+
+      {/* Контент поверх canvas */}
       <div className="absolute inset-0 z-10 flex flex-col items-center justify-center text-white">
         {trustBadge && (
           <div className="mb-8 animate-fade-in-down">

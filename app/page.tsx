@@ -11,7 +11,22 @@ import { NeonButton } from '@/components/ui/neon-button';
 import { SuccessIcon, HeartIcon, ToggleIcon, DownloadDoneIcon } from '@/components/ui/animated-state-icons';
 import { QuestionChat } from '@/components/ui/question-chat';
 
-const Hero = dynamic(() => import('@/components/ui/animated-shader-hero'), { ssr: false });
+const Hero = dynamic(() => import('@/components/ui/animated-shader-hero'), {
+  ssr: false,
+  loading: () => (
+    <div className="relative w-full h-screen flex flex-col items-center justify-center"
+      style={{ background: 'linear-gradient(135deg, #0C0501 0%, #1a0800 50%, #0C0501 100%)' }}>
+      <div className="text-center px-4">
+        <div className="text-5xl md:text-7xl font-bold mb-4" style={{ background: 'linear-gradient(90deg,#fb923c,#fbbf24)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
+          Зарабатывай на ИИ
+        </div>
+        <div className="text-5xl md:text-7xl font-bold" style={{ background: 'linear-gradient(90deg,#fbbf24,#f97316)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
+          уже через 7 дней
+        </div>
+      </div>
+    </div>
+  ),
+});
 
 // ─── palette ──────────────────────────────────────────────
 const P = {
