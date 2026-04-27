@@ -81,14 +81,15 @@ const courseFeatures = [
   { title: 'Первые деньги за 7–14 дней',icon: Zap,      description: 'Каждый урок — это готовая услуга. Без портфолио, без опыта, без вложений в рекламу.' },
 ];
 
-const PRICE_BASIC = '1 490 ₽';
-const PRICE_PRO   = '2 490 ₽';
+const PRICE_BASIC = '2 990 ₽';
+const PRICE_PRO   = '3 990 ₽';
+const PRICE_VIP   = '8 990 ₽';
 
 const lessons = [
   { number: '01', title: 'Услуги ИИ-специалиста — что продавать бизнесу', description: 'Разберём, какие конкретные услуги вы можете предлагать бизнесам и экспертам уже сегодня. Никакой теории — только живые примеры и реальные чеки. Узнаем, какие задачи бизнес готов делегировать ИИ-специалисту и сколько за это платить.', tags: ['8+ услуг с ценами', 'Позиционирование', 'Реальные кейсы', 'Как не демпинговать'] },
-  { number: '02', title: 'Claude — полный обзор и создание сайта за 1 час', description: 'Практический урок по работе с Claude. За один час создадим полноценный продающий сайт для клиента. Покажу все фишки, которые превращают Claude из чат-бота в полноценный инструмент заработка.', tags: ['Возможности Claude', 'Пошаговое создание сайта', 'Шаблоны промтов', 'Упаковка и продажа услуги'] },
-  { number: '03', title: 'Коммерческое предложение через Claude + ChatGPT', description: 'КП — один из самых высокооплачиваемых контент-продуктов. Покажу связку Claude + ChatGPT, которая создаёт продающие КП для любой ниши за 20–30 минут. Одно КП стоит 2 000–5 000 ₽.', tags: ['Структура продающего КП', 'Связка Claude + ChatGPT', 'Готовые шаблоны', 'Как назначать цену'] },
-  { number: '04', title: 'Карусели: ChatGPT + Canva + Midjourney', description: 'Карусели — самый вирусный формат в соцсетях. Покажу полный процесс: от идеи до готового дизайна. Услугу легко продавать за 1 500–3 000 ₽ за штуку, а делать — за 30 минут.', tags: ['Идеи через ChatGPT', 'Тексты и сценарии', 'Дизайн в Canva + Midjourney', 'Продажа пакетами'] },
+  { number: '02', title: 'Как создать контент-план с помощью ИИ', description: 'Покажу как создавать профессиональные контент-планы для бизнеса с помощью ИИ. Один контент-план можно продавать за 1 000–3 000 ₽ и делать несколько штук в день. Быстро, системно, с гарантированным результатом для клиента.', tags: ['Структура контент-плана', 'Инструменты ИИ', 'Готовые шаблоны', 'Как назначать цену'] },
+  { number: '03', title: 'Создаём карусели с помощью ИИ', description: 'Карусели — самый вирусный формат в соцсетях. Покажу полный процесс: от идеи до готового дизайна. Услугу легко продавать за 1 500–3 000 ₽ за штуку, а делать — за 30 минут.', tags: ['Идеи через ChatGPT', 'Тексты и сценарии', 'Дизайн в Canva + Midjourney', 'Продажа пакетами'] },
+  { number: '04', title: 'Claude — полный обзор и создание сайта за 1 час', description: 'Практический урок по работе с Claude. За один час создадим полноценный продающий сайт для клиента. Покажу все фишки, которые превращают Claude из чат-бота в полноценный инструмент заработка.', tags: ['Возможности Claude', 'Пошаговое создание сайта', 'Шаблоны промтов', 'Упаковка и продажа услуги'] },
   { number: '05', title: 'Где найти клиента и закрыть его на оплату', description: 'Самый практичный урок. Где искать клиентов и как закрывать их на деньги. Рабочие каналы, скрипты переписок и реальные подходы, которые мы с учениками используем прямо сейчас.', tags: ['Топ-5 каналов поиска', 'Скрипты переписок', 'Как презентовать услугу', 'Стратегия на 100 000 ₽'] },
 ];
 
@@ -105,7 +106,7 @@ const faqs = [
   { q: 'Нужен ли опыт в ИИ или программировании?', a: 'Нет. Курс рассчитан на полных новичков. Если ты умеешь пользоваться смартфоном и интернетом — этого достаточно. Начинаем с нуля.' },
   { q: 'За сколько времени заработать первые деньги?', a: 'Большинство учеников получают первый оплаченный заказ в течение 7–14 дней после прохождения курса. Всё зависит от твоей активности.' },
   { q: 'Нужно ли платить за ChatGPT или Claude?', a: 'Для старта хватит бесплатных версий. Платные подписки ускоряют работу, но они не обязательны для первых заработков.' },
-  { q: 'Чем тариф «Про» отличается от «Базового»?', a: 'В Про версии — дополнительный урок по 5+ ИИ-инструментам, готовые КП-шаблоны под разные ниши, чат с куратором на 30 дней и разбор твоей первой сделки.' },
+  { q: 'Чем тарифы отличаются друг от друга?', a: '«Базовый» (2 990 ₽) — 3 урока: услуги, контент-план и карусели. «Премиум» (3 990 ₽) — все 5 уроков, включая Claude-сайт и поиск клиентов. «VIP» (8 990 ₽) — все 5 уроков + личная сессия со мной и пошаговый план до 100 000 ₽.' },
   { q: 'Можно ли вернуть деньги?', a: 'Да. Если в течение 7 дней тебе не понравится — вернём всю сумму без вопросов.' },
   { q: 'Это основной доход или подработка?', a: 'Зависит от тебя. Многие ученики начинали с подработки и вышли на 100 000+ ₽ в месяц. Курс даёт систему — ты решаешь, как её применять.' },
 ];
@@ -185,8 +186,9 @@ function OfertaModal({ onClose }: { onClose: () => void }) {
           <section>
             <p className="font-semibold mb-2" style={{ color: '#F5EDE0' }}>3. СТОИМОСТЬ И ПОРЯДОК ОПЛАТЫ</p>
             <p>3.1. Стоимость услуг определяется выбранным тарифом на момент оплаты:</p>
-            <p className="mt-2">— Тариф «Базовый»: 1 490 рублей;</p>
-            <p>— Тариф «Про»: 2 490 рублей.</p>
+            <p className="mt-2">— Тариф «Базовый»: 2 990 рублей;</p>
+            <p>— Тариф «Премиум»: 3 990 рублей;</p>
+            <p>— Тариф «VIP»: 8 990 рублей.</p>
             <p className="mt-2">3.2. Оплата производится в рублях РФ через платёжные системы, указанные на сайте.</p>
           </section>
 
@@ -253,7 +255,7 @@ export default function Home() {
         headline={{ line1: 'Зарабатывай на ИИ', line2: 'уже через 7 дней' }}
         subtitle="5 уроков о том, как продавать услуги на основе ChatGPT и Claude — бизнесам, которые уже ищут таких специалистов"
         buttons={{
-          primary:   { text: 'Начать за 2 490 ₽', onClick: scrollToPricing },
+          primary:   { text: 'Начать за 2 990 ₽', onClick: scrollToPricing },
           secondary: { text: 'Смотреть урок ▶', onClick: () => {
             document.getElementById('video-section')?.scrollIntoView({ behavior: 'smooth' });
             setTimeout(() => {
@@ -315,7 +317,7 @@ export default function Home() {
         <div className="relative z-10 mx-auto w-full max-w-5xl space-y-10">
           <A className="max-w-2xl mx-auto">
             <Label>ЧТО ВНУТРИ</Label>
-            <SectionTitle>5 УРОКОВ — 5 ИСТОЧНИКОВ ДОХОДА</SectionTitle>
+            <SectionTitle>5 ПОЛНОЦЕННЫХ БЛОКОВ</SectionTitle>
             <p style={{ color: P.muted }}>
               Каждый урок — это готовая услуга, которую ты можешь продавать бизнесам сразу после просмотра.
             </p>
@@ -480,46 +482,89 @@ export default function Home() {
             </div>
           </A>
 
-          <div className="grid md:grid-cols-2 gap-6">
-            {/* BASIC */}
+          <div className="grid md:grid-cols-3 gap-6">
+            {/* БАЗОВЫЙ */}
             <A delay={0.15}>
               <div className="p-7 rounded-2xl flex flex-col h-full" style={{ background: P.card, border: `1px solid ${P.border}` }}>
                 <p className="text-xs uppercase tracking-widest font-semibold mb-5" style={{ color: P.muted, letterSpacing: '0.15em' }}>БАЗОВЫЙ</p>
-                <div style={{ fontFamily: "'BebasNeue', sans-serif", fontSize: '3rem', color: P.text, lineHeight: 1, letterSpacing: '0.02em' }}>{PRICE_BASIC}</div>
+                <div style={{ fontFamily: "'BebasNeue', sans-serif", fontSize: '2.6rem', color: P.text, lineHeight: 1, letterSpacing: '0.02em' }}>{PRICE_BASIC}</div>
                 <p className="text-xs mt-1 line-through mb-1" style={{ color: P.faint }}>Обычная цена: 15 000 ₽</p>
-                <p className="text-xs mb-8 font-semibold" style={{ color: '#4ade80' }}>Скидка 90%</p>
+                <p className="text-xs mb-6 font-semibold" style={{ color: '#4ade80' }}>Скидка 80%</p>
                 <ul className="space-y-3 flex-1 mb-8">
-                  {['5 видеоуроков в записи', 'Доступ навсегда', 'Шаблоны промтов', 'Список 8+ услуг с ценами', 'Скрипты для поиска клиентов'].map((item, i) => (
+                  {[
+                    'Урок 1: Услуги ИИ-специалиста',
+                    'Урок 2: Контент-план с помощью ИИ',
+                    'Урок 3: Карусели с помощью ИИ',
+                    'Доступ навсегда',
+                    'Шаблоны промтов',
+                  ].map((item, i) => (
                     <li key={i} className="flex items-start gap-3 text-sm" style={{ color: P.dim }}>
                       <span style={{ color: P.accent, flexShrink: 0, marginTop: 2 }}>✓</span>{item}
                     </li>
                   ))}
                 </ul>
-                <NeonButton variant="default" size="lg" className="w-full" onClick={() => window.open('https://payform.ru/3wbiB4T/', '_blank')}>
+                <NeonButton variant="default" size="lg" className="w-full" onClick={() => window.open('https://payform.ru/qfbmeOJ/', '_blank')}>
                   Купить за {PRICE_BASIC} →
                 </NeonButton>
               </div>
             </A>
 
-            {/* PRO */}
+            {/* ПРЕМИУМ */}
             <A delay={0.25}>
               <div className="relative p-7 rounded-2xl flex flex-col h-full" style={{ background: P.card, border: `2px solid ${P.borderB}`, boxShadow: `0 0 50px rgba(249,115,22,0.1)` }}>
                 <div className="absolute -top-3.5 left-6 text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-wider" style={{ background: P.accent, color: '#000' }}>
                   Рекомендуем
                 </div>
-                <p className="text-xs uppercase tracking-widest font-semibold mb-5" style={{ color: P.accentL, letterSpacing: '0.15em' }}>ПРО</p>
-                <div style={{ fontFamily: "'BebasNeue', sans-serif", fontSize: '3rem', color: P.accentL, lineHeight: 1, letterSpacing: '0.02em' }}>{PRICE_PRO}</div>
-                <p className="text-xs mt-1 line-through mb-1" style={{ color: P.faint }}>Обычная цена: 30 000 ₽</p>
-                <p className="text-xs mb-8 font-semibold" style={{ color: '#4ade80' }}>Скидка 92%</p>
+                <p className="text-xs uppercase tracking-widest font-semibold mb-5" style={{ color: P.accentL, letterSpacing: '0.15em' }}>ПРЕМИУМ</p>
+                <div style={{ fontFamily: "'BebasNeue', sans-serif", fontSize: '2.6rem', color: P.accentL, lineHeight: 1, letterSpacing: '0.02em' }}>{PRICE_PRO}</div>
+                <p className="text-xs mt-1 line-through mb-1" style={{ color: P.faint }}>Обычная цена: 25 000 ₽</p>
+                <p className="text-xs mb-6 font-semibold" style={{ color: '#4ade80' }}>Скидка 84%</p>
                 <ul className="space-y-3 flex-1 mb-8">
-                  {["Всё из тарифа «Базовый»", 'Бонусный урок: 5+ ИИ-инструментов', 'Готовые КП-шаблоны под ниши', 'Чат с куратором 30 дней', 'Разбор твоей первой сделки', 'Приоритетный доступ к новым материалам'].map((item, i) => (
+                  {[
+                    'Все 5 уроков',
+                    'Урок 4: Claude — сайт за 1 час',
+                    'Урок 5: Где найти клиента',
+                    'Доступ навсегда',
+                    'Шаблоны промтов',
+                    'Скрипты для поиска клиентов',
+                  ].map((item, i) => (
                     <li key={i} className="flex items-start gap-3 text-sm" style={{ color: P.dim }}>
                       <span style={{ color: P.accentL, flexShrink: 0, marginTop: 2 }}>✓</span>{item}
                     </li>
                   ))}
                 </ul>
-                <NeonButton variant="solid" size="lg" className="w-full" onClick={() => window.open('https://payform.ru/5qbiB5R/', '_blank')}>
+                <NeonButton variant="solid" size="lg" className="w-full" onClick={() => window.open('https://payform.ru/40bmgHO/', '_blank')}>
                   Купить за {PRICE_PRO} →
+                </NeonButton>
+              </div>
+            </A>
+
+            {/* VIP */}
+            <A delay={0.35}>
+              <div className="relative p-7 rounded-2xl flex flex-col h-full" style={{ background: '#1A0C04', border: `1px solid rgba(249,115,22,0.4)`, boxShadow: `0 0 60px rgba(249,115,22,0.08)` }}>
+                <div className="absolute -top-3.5 left-6 text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-wider" style={{ background: 'linear-gradient(90deg, #F97316, #FBBF24)', color: '#000' }}>
+                  VIP
+                </div>
+                <p className="text-xs uppercase tracking-widest font-semibold mb-5" style={{ color: '#FBBF24', letterSpacing: '0.15em' }}>VIP</p>
+                <div style={{ fontFamily: "'BebasNeue', sans-serif", fontSize: '2.6rem', color: '#FBBF24', lineHeight: 1, letterSpacing: '0.02em' }}>{PRICE_VIP}</div>
+                <p className="text-xs mt-1 line-through mb-1" style={{ color: P.faint }}>Обычная цена: 50 000 ₽</p>
+                <p className="text-xs mb-6 font-semibold" style={{ color: '#4ade80' }}>Скидка 82%</p>
+                <ul className="space-y-3 flex-1 mb-8">
+                  {[
+                    'Все 5 уроков',
+                    'Доступ навсегда',
+                    'Шаблоны промтов',
+                    'Скрипты для поиска клиентов',
+                    'Личная сессия и разбор лично со мной',
+                    'Пошаговый план до 100 000 ₽',
+                  ].map((item, i) => (
+                    <li key={i} className="flex items-start gap-3 text-sm" style={{ color: P.dim }}>
+                      <span style={{ color: '#FBBF24', flexShrink: 0, marginTop: 2 }}>✓</span>{item}
+                    </li>
+                  ))}
+                </ul>
+                <NeonButton variant="solid" size="lg" className="w-full" style={{ background: 'linear-gradient(90deg,#F97316,#FBBF24)', color: '#000', fontWeight: 700 } as React.CSSProperties} onClick={() => window.open('https://payform.ru/8kbmgKg/', '_blank')}>
+                  Купить за {PRICE_VIP} →
                 </NeonButton>
               </div>
             </A>
@@ -581,7 +626,7 @@ export default function Home() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <NeonButton variant="solid" size="lg" onClick={scrollToPricing}>
-              Начать за 2 490 ₽
+              Начать за 2 990 ₽
             </NeonButton>
             <NeonButton variant="ghost" size="lg" onClick={() => window.open('https://t.me/themmancur', '_blank')}>
               Задать вопрос в Telegram
