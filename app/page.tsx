@@ -105,9 +105,9 @@ const results = [
 const faqs = [
   { q: 'Нужен ли опыт в ИИ или программировании?', a: 'Нет. Курс рассчитан на полных новичков. Если ты умеешь пользоваться смартфоном и интернетом — этого достаточно. Начинаем с нуля.' },
   { q: 'За сколько времени заработать первые деньги?', a: 'Большинство учеников получают первый оплаченный заказ в течение 7–14 дней после прохождения курса. Всё зависит от твоей активности.' },
-  { q: 'Нужно ли платить за ChatGPT или Claude?', a: 'Для старта хватит бесплатных версий. Платные подписки ускоряют работу, но они не обязательны для первых заработков.' },
+  { q: 'Нужно ли платить за ChatGPT или Claude?', a: 'За Claude нужно будет заплатить — около 2 000 ₽ в месяц в зависимости от региона. Этого тарифа полностью достаточно для всех задач курса. ChatGPT платить не обязательно — бесплатной версии хватит. Если хочешь, можешь перейти на платный план, но большинство задач решается бесплатно.' },
   { q: 'Чем тарифы отличаются друг от друга?', a: '«Базовый» (2 990 ₽) — 3 урока: услуги, контент-план и карусели. «Премиум» (3 990 ₽) — все 5 уроков, включая Claude-сайт и поиск клиентов. «VIP» (8 990 ₽) — все 5 уроков + личная сессия со мной и пошаговый план до 100 000 ₽.' },
-  { q: 'Можно ли вернуть деньги?', a: 'Да. Если в течение 7 дней тебе не понравится — вернём всю сумму без вопросов.' },
+  { q: 'Можно ли вернуть деньги?', a: 'Да. Если ты внедришь всё, что показано в курсе, и не получишь результат — вернём всю сумму в течение 1 месяца. Без лишних вопросов.' },
   { q: 'Это основной доход или подработка?', a: 'Зависит от тебя. Многие ученики начинали с подработки и вышли на 100 000+ ₽ в месяц. Курс даёт систему — ты решаешь, как её применять.' },
 ];
 
@@ -503,7 +503,7 @@ export default function Home() {
                     </li>
                   ))}
                 </ul>
-                <NeonButton variant="default" className="w-full py-3 text-sm" onClick={() => window.open('https://payform.ru/qfbmeOJ/', '_blank')}>
+                <NeonButton variant="default" className="w-full py-3 text-sm whitespace-nowrap" onClick={() => window.open('https://payform.ru/qfbmeOJ/', '_blank')}>
                   Купить за {PRICE_BASIC} →
                 </NeonButton>
               </div>
@@ -533,7 +533,7 @@ export default function Home() {
                     </li>
                   ))}
                 </ul>
-                <NeonButton variant="solid" className="w-full py-3 text-sm" onClick={() => window.open('https://payform.ru/40bmgHO/', '_blank')}>
+                <NeonButton variant="solid" className="w-full py-3 text-sm whitespace-nowrap" onClick={() => window.open('https://payform.ru/40bmgHO/', '_blank')}>
                   Купить за {PRICE_PRO} →
                 </NeonButton>
               </div>
@@ -563,7 +563,7 @@ export default function Home() {
                     </li>
                   ))}
                 </ul>
-                <NeonButton variant="solid" className="w-full py-3 text-sm" style={{ background: 'linear-gradient(90deg,#F97316,#FBBF24)', color: '#000', fontWeight: 700 } as React.CSSProperties} onClick={() => window.open('https://payform.ru/8kbmgKg/', '_blank')}>
+                <NeonButton variant="solid" className="w-full py-3 text-sm whitespace-nowrap" style={{ background: 'linear-gradient(90deg,#F97316,#FBBF24)', color: '#000', fontWeight: 700 } as React.CSSProperties} onClick={() => window.open('https://payform.ru/8kbmgKg/', '_blank')}>
                   Купить за {PRICE_VIP} →
                 </NeonButton>
               </div>
