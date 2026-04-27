@@ -23,10 +23,10 @@ const useShaderBackground = () => {
     const isMobile = window.innerWidth < 768;
 
     const gl = canvas.getContext('webgl2');
-    if (!gl) return; // fallback: CSS gradient via bg-black already on canvas
+    if (!gl) return; // fallback: CSS gradient on container
 
-    // Much lower resolution on mobile to prevent lag
-    const dpr = isMobile ? 0.2 : Math.min(0.5, 0.5 * window.devicePixelRatio);
+    // Desktop: original quality. Mobile: reduced to prevent lag
+    const dpr = isMobile ? 0.25 : Math.max(1, 0.5 * window.devicePixelRatio);
 
     const resize = () => {
       canvas.width = window.innerWidth * dpr;
@@ -150,8 +150,8 @@ const Hero: React.FC<HeroProps> = ({ trustBadge, headline, subtitle, buttons, cl
       {/* WebGL canvas - фоновая анимация */}
       <canvas
         ref={canvasRef}
-        className="absolute inset-0 w-full h-full"
-        style={{ opacity: 0.9 }}
+        className="absolute inset-0 w-full h-full object-contain touch-none"
+        style={{ background: 'black' }}
       />
 
       {/* Контент поверх canvas */}
