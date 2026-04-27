@@ -503,8 +503,8 @@ export default function Home() {
                     </li>
                   ))}
                 </ul>
-                <NeonButton variant="default" className="w-full py-3 text-sm whitespace-nowrap" onClick={() => window.open('https://payform.ru/qfbmeOJ/', '_blank')}>
-                  Купить за {PRICE_BASIC} →
+                <NeonButton variant="default" className="w-full" style={{ fontFamily: "'BebasNeue', sans-serif", fontSize: '1.4rem', letterSpacing: '0.12em', padding: '10px 0' }} onClick={() => window.open('https://payform.ru/qfbmeOJ/', '_blank')}>
+                  КУПИТЬ
                 </NeonButton>
               </div>
             </A>
@@ -533,8 +533,8 @@ export default function Home() {
                     </li>
                   ))}
                 </ul>
-                <NeonButton variant="solid" className="w-full py-3 text-sm whitespace-nowrap" onClick={() => window.open('https://payform.ru/40bmgHO/', '_blank')}>
-                  Купить за {PRICE_PRO} →
+                <NeonButton variant="solid" className="w-full" style={{ fontFamily: "'BebasNeue', sans-serif", fontSize: '1.4rem', letterSpacing: '0.12em', padding: '10px 0' }} onClick={() => window.open('https://payform.ru/40bmgHO/', '_blank')}>
+                  КУПИТЬ
                 </NeonButton>
               </div>
             </A>
@@ -563,8 +563,8 @@ export default function Home() {
                     </li>
                   ))}
                 </ul>
-                <NeonButton variant="solid" className="w-full py-3 text-sm whitespace-nowrap" style={{ background: 'linear-gradient(90deg,#F97316,#FBBF24)', color: '#000', fontWeight: 700 } as React.CSSProperties} onClick={() => window.open('https://payform.ru/8kbmgKg/', '_blank')}>
-                  Купить за {PRICE_VIP} →
+                <NeonButton variant="solid" className="w-full" style={{ background: 'linear-gradient(90deg,#F97316,#FBBF24)', color: '#000', fontFamily: "'BebasNeue', sans-serif", fontSize: '1.4rem', letterSpacing: '0.12em', padding: '10px 0' } as React.CSSProperties} onClick={() => window.open('https://payform.ru/8kbmgKg/', '_blank')}>
+                  КУПИТЬ
                 </NeonButton>
               </div>
             </A>
