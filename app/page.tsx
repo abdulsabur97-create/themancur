@@ -503,7 +503,7 @@ export default function Home() {
                     </li>
                   ))}
                 </ul>
-                <NeonButton variant="default" size="lg" className="w-full" onClick={() => window.open('https://payform.ru/qfbmeOJ/', '_blank')}>
+                <NeonButton variant="default" className="w-full py-3 text-sm" onClick={() => window.open('https://payform.ru/qfbmeOJ/', '_blank')}>
                   Купить за {PRICE_BASIC} →
                 </NeonButton>
               </div>
@@ -533,7 +533,7 @@ export default function Home() {
                     </li>
                   ))}
                 </ul>
-                <NeonButton variant="solid" size="lg" className="w-full" onClick={() => window.open('https://payform.ru/40bmgHO/', '_blank')}>
+                <NeonButton variant="solid" className="w-full py-3 text-sm" onClick={() => window.open('https://payform.ru/40bmgHO/', '_blank')}>
                   Купить за {PRICE_PRO} →
                 </NeonButton>
               </div>
@@ -563,7 +563,7 @@ export default function Home() {
                     </li>
                   ))}
                 </ul>
-                <NeonButton variant="solid" size="lg" className="w-full" style={{ background: 'linear-gradient(90deg,#F97316,#FBBF24)', color: '#000', fontWeight: 700 } as React.CSSProperties} onClick={() => window.open('https://payform.ru/8kbmgKg/', '_blank')}>
+                <NeonButton variant="solid" className="w-full py-3 text-sm" style={{ background: 'linear-gradient(90deg,#F97316,#FBBF24)', color: '#000', fontWeight: 700 } as React.CSSProperties} onClick={() => window.open('https://payform.ru/8kbmgKg/', '_blank')}>
                   Купить за {PRICE_VIP} →
                 </NeonButton>
               </div>
