@@ -39,6 +39,9 @@ export function QuestionChat() {
 
   const handleSend = () => {
     if (!value.trim()) return;
+    const text = encodeURIComponent(`Вопрос с сайта themancur.ru:\n\n${value.trim()}`);
+    // Открываем Telegram с заполненным сообщением — клиент жмёт "отправить" в TG
+    window.open(`https://t.me/themmancur?text=${text}`, '_blank');
     startTransition(() => {
       setSent(true);
       setValue('');
@@ -70,7 +73,7 @@ export function QuestionChat() {
             НАПИШИ — Я ОТВЕЧУ
           </h2>
           <p className="mb-8 text-sm" style={{ color: '#7A5F3A' }}>
-            Оставь вопрос — отвечу в течение нескольких часов
+            Напиши вопрос — он откроется у меня в Telegram, отвечу в течение нескольких часов
           </p>
         </motion.div>
 
@@ -91,8 +94,8 @@ export function QuestionChat() {
               >
                 <CheckCircle size={48} style={{ color: ACCENT }} />
               </motion.div>
-              <p className="mt-4 font-semibold text-lg" style={{ color: '#F5EDE0' }}>Вопрос отправлен!</p>
-              <p className="mt-2 text-sm" style={{ color: '#7A5F3A' }}>Отвечу в ближайшее время</p>
+              <p className="mt-4 font-semibold text-lg" style={{ color: '#F5EDE0' }}>Telegram открыт!</p>
+              <p className="mt-2 text-sm text-center px-6" style={{ color: '#7A5F3A' }}>Нажми «Отправить» в Telegram — отвечу в ближайшее время</p>
               <button
                 onClick={() => setSent(false)}
                 className="mt-6 text-xs underline underline-offset-4 transition-colors hover:text-orange-300"
