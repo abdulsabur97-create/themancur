@@ -277,7 +277,7 @@ export default function Home() {
               // eslint-disable-next-line @typescript-eslint/no-explicit-any
               (window as any)._wq = (window as any)._wq || [];
               // eslint-disable-next-line @typescript-eslint/no-explicit-any
-              (window as any)._wq.push({ id: '59xz7v37fo', onReady: (video: any) => video.play() });
+              (window as any)._wq.push({ id: 'bt4l7vpbzt', onReady: (video: any) => video.play() });
             }, 600);
           }},
         }}
@@ -286,7 +286,7 @@ export default function Home() {
       {/* ── VIDEO ───────────────────────────────────────── */}
       <div id="video-section">
       <VideoSpotlight
-        src="https://fast.wistia.net/embed/iframe/59xz7v37fo"
+        src="https://fast.wistia.net/embed/iframe/bt4l7vpbzt"
         label="СМОТРИ"
         title="КАК ЭТО РАБОТАЕТ НА ПРАКТИКЕ"
         subtitle=""
